@@ -1,0 +1,37 @@
+{
+  "name": "victorbp-backend",
+  "version": "2.5.0",
+  "description": "Backend for victorbp projects",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Victor-Bernabe/victorbp-backend.git"
+  },
+  "keywords": [
+    "backend",
+    "victorbp"
+  ],
+  "author": "Victor Bernabe Perez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Victor-Bernabe/victorbp-backend/issues"
+  },
+  "homepage": "https://github.com/Victor-Bernabe/victorbp-backend#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bcrypt": "^5.0.0",
+    "dotenv": "^16.0.2",
+    "mongodb": "^3.6.3",
+    "nodemailer": "^6.4.17",
+    "qs": "^6.10.3",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
