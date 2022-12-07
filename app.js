@@ -12,6 +12,7 @@ dotenv.config();
 const PORT = process.env.PORT || 3000; // process.env.PORT for Cyclic
 const TTDB = 'two-thousand-db';
 const SLDB = 'simple-list-db';
+const PTDB = 'patatami-db';
 const KIDB = 'kanji-inspector-db';
 const ORIGINS = [
   'https://simple-list.victorbp.site',
@@ -102,9 +103,19 @@ async function main(params) {
           data = await getLists(client, params.email, params.token);
         }
         break;
+      case 'getDishes':
+        {
+          data = await getDishes(client);
+        }
+        break;
       case 'addList':
         {
           data = await addList(client, params.title, params.email);
+        }
+        break;
+      case 'addDish':
+        {
+          data = await addDish(client, params.title, params.type, params.image);
         }
         break;
       case 'addItem':
@@ -120,6 +131,11 @@ async function main(params) {
       case 'removeList':
         {
           data = await removeList(client, params.listId);
+        }
+        break;
+      case 'removeDish':
+        {
+          data = await removeDish(client, params.dishId);
         }
         break;
       case 'shareList':
@@ -377,6 +393,17 @@ async function getLists(client, email, token) {
   }
 }
 
+// Get dishes
+async function getDishes(client) {
+  const dishes = await client
+    .db(PTDB)
+    .collection('dishes')
+    .find({})
+    .toArray();
+
+  return dishes;
+}
+
 // Add list to DB
 async function addList(client, title, email) {
   const result = await client
@@ -388,6 +415,20 @@ async function addList(client, title, email) {
       sortBy: 'none',
       title: title,
       items: [],
+    });
+
+  return result;
+}
+
+// Add dish to patatami-db
+async function addDish(client, title, type, image) {
+  const result = await client
+    .db(PTDB)
+    .collection('dishes')
+    .insertOne({
+      title: title,
+      type: type,
+      image: image,
     });
 
   return result;
@@ -437,6 +478,16 @@ async function removeList(client, listId) {
     .db(SLDB)
     .collection('lists')
     .deleteOne({ _id: ObjectId(listId) });
+
+  return result;
+}
+
+// Remove dish from patatami-db
+async function removeDish(client, dishId) {
+  const result = await client
+    .db(PTDB)
+    .collection('dishes')
+    .deleteOne({ _id: ObjectId(dishId) });
 
   return result;
 }

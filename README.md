@@ -1,6 +1,6 @@
 # victorbp-backend
 
-Node backend for my personal projects. Hosted at Render.
+Node backend for my personal projects. Hosted at Cyclic.
 
 ### Development
 
